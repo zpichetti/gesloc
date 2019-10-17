@@ -10,10 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_203639) do
+ActiveRecord::Schema.define(version: 2019_09_01_070559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "housings", force: :cascade do |t|
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.string "name"
+    t.string "housingid", default: "", null: false
+    t.string "floor"
+    t.string "cage"
+    t.string "building"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["housingid"], name: "index_housings_on_housingid", unique: true
+    t.index ["project_id"], name: "index_housings_on_project_id"
+    t.index ["reset_password_token"], name: "index_housings_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_housings_on_unlock_token", unique: true
+  end
+
+  create_table "projets", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
